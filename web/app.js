@@ -23,22 +23,34 @@ function convertToWord(letter) {
 function win(userChoice, computerChoice) {
     userScore++;
     userScore_span.innerHTML = userScore;
-    result_p.innerHTML = "A(z) " + convertToWord(userChoice) + " legyőzte a(z) " + convertToWord(computerChoice) + "t. Nyertél!";
+    result_p.innerHTML = "A(z) " + convertToWord(userChoice) + " (te) legyőzte a(z) " + convertToWord(computerChoice) + "t (gép). Nyertél!";
+}
+
+function winko(userChoice) {
+    userScore++;
+    userScore_span.innerHTML = userScore;
+    result_p.innerHTML = "A(z) " + convertToWord(userChoice) + " (te) legyőzte a Követ (gép). Nyertél!";
 }
 
 function lose(userChoice, computerChoice) {
     computerScore++;
     computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = "A(z) " + convertToWord(computerChoice) + " legyőzte a(z) " + convertToWord(userChoice) + "t. Vesztettél!";
+    result_p.innerHTML = "A(z) " + convertToWord(computerChoice) + " (gép) legyőzte a(z) " + convertToWord(userChoice) + "t (te). Vesztettél!";
+}
+
+function loseko(computerChoice) {
+    computerScore++;
+    computerScore_span.innerHTML = computerScore;
+    result_p.innerHTML = "A(z) " + convertToWord(computerChoice) + " (gép) legyőzte a Követ (te). Vesztettél!";
 }
 
 function draw(userChoice, computerChoice) {
-    result_p.innerHTML = "A(z) " + convertToWord(computerChoice) + "(te) nem tudja legyőzni a " + convertToWord(userChoice) + "t(gép). Döntetlen!";
+    result_p.innerHTML = "A(z) " + convertToWord(userChoice) + "(te) nem tudja legyőzni a " + convertToWord(computerChoice) + "t(gép). Döntetlen!";
 }
 
-
-
-
+function drawko(userChoice) {
+    result_p.innerHTML = "A(z) " + convertToWord(userChoice) + "(te) nem tudja legyőzni a Követ(gép). Döntetlen!";
+}
 
 
 
@@ -48,19 +60,25 @@ function game(userChoice) {
     console.log("computer choice: " + computerChoice);
     switch (userChoice + computerChoice) {
         case "ko":
-        case "pk":
         case "op":
             win(userChoice, computerChoice);
             break;
-        case "ok":
-        case "kp":
+        case "pk":
+            winko(userChoice);
+            break;
+            case "ok":
         case "po":
             lose(userChoice, computerChoice);
             break;
-        case "kk":
+        case "kp":
+            loseko(computerChoice);
+            break;
         case "pp":
         case "oo":
             draw(userChoice, computerChoice);
+            break;
+        case "kk":
+            drawko(userChoice)
             break;
     }
 }
@@ -82,8 +100,3 @@ function main() {
 
 
 main();
-
-
-
-
-
